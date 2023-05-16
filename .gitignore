@@ -1,0 +1,53 @@
+/.cache/
+/.vscode/
+/tools/
+/offsets.ini
+/ayypex
+/interface-external/
+/.clang-format
+/CMakeFiles/
+/CMakeCache.txt
+/build/
+/Makefile
+/cmake_install.cmake
+/core/
+/compile_commands.json
+
+# CMake
+cmake-build-*
+cmake_install.*
+progress.*
+CMakeDirectoryInformation.*
+
+# Prerequisites
+*.d
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Fortran module files
+*.mod
+*.smod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
