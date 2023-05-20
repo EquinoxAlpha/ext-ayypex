@@ -1,3 +1,5 @@
+I don't play Apex much anymore, so I won't be updating this very often. Feel free to take the code and improve it.
+
 # ayypex
 
 The external version of ayypex
