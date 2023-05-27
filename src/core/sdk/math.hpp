@@ -1,6 +1,6 @@
 #pragma once
-#include "mem.h"
-#include "../offsets.h"
+#include "memory.hpp"
+#include "../offsets.hpp"
 #include <cmath>
 #include <cstdint>
 #include <sstream>

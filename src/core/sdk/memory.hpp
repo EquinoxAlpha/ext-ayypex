@@ -76,7 +76,7 @@ namespace mem {
     }
 
     template <typename T>
-    inline ssize_t read_multiple(std::vector<std::pair<uintptr_t, T>>& addresses) {
+    inline ssize_t read_multiple(std::vector<std::pair<uintptr_t, T*>> addresses) {
         struct iovec local[addresses.size()], remote[addresses.size()];
         for (size_t i = 0; i < addresses.size(); i++) {
             local[i].iov_base = &addresses[i].second;

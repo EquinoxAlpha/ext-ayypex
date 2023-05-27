@@ -1,7 +1,7 @@
 #pragma once
 
-#include "module.h"
-#include "common.h"
+#include "modules/module.hpp"
+#include "common.hpp"
 #include <mutex>
 #include <vector>
 
@@ -16,5 +16,6 @@ namespace core {
 
     void tick(float delta_time);
     void draw();
+    void draw_menu();
     void init();
 }

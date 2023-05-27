@@ -8,7 +8,7 @@
 #include <string.h>
 #include <fstream>
 #include <iostream>
-#include "sdk/logging.h"
+#include "sdk/logging.hpp"
 
 class Mouse {
     int fd = -1;

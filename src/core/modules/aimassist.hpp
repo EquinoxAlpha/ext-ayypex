@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../module.h"
-#include "../common.h"
+#include "module.hpp"
+#include "../common.hpp"
 
 class AimAssist : public Module {
     public:
@@ -16,5 +16,6 @@ class AimAssist : public Module {
     static void after_createmove();
     void tick(float delta_time) override;
     void draw() override;
+    void draw_menu() override;
     void init() override;
 };

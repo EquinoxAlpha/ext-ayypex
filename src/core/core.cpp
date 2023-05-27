@@ -1,16 +1,17 @@
-#include "core.h"
+#include "core.hpp"
 
-#include "modules/aimassist.h"
-#include "modules/glow.h"
-#include "modules/rcs.h"
-#include "modules/triggerbot.h"
-#include "offsets.h"
+#include "imgui/imgui.h"
+#include "modules/aimassist.hpp"
+#include "modules/glow.hpp"
+#include "modules/rcs.hpp"
+#include "modules/triggerbot.hpp"
+#include "offsets.hpp"
 #include <sys/types.h>
 #include <thread>
 #include <unistd.h>
-#include "common.h"
-#include "sdk/mem.h"
-#include "sdk/utils.h"
+#include "common.hpp"
+#include "sdk/memory.hpp"
+#include "sdk/utils.hpp"
 
 namespace core {
     std::vector<Module*> modules;
@@ -36,10 +37,10 @@ namespace core {
         globals.local_player->update();
 
         if (globals.local_player->held_weapon_index != 0xFFF) {
-            //logger::debug("held weapon idx: %d", globals.local_player->held_weapon_index);
-            //logger::debug("held weapon addr: 0x%X", ent_infos[globals.local_player->held_weapon_index].pEntity);
+            logger::debug("held weapon idx: %d", globals.local_player->held_weapon_index);
+            logger::debug("held weapon addr: 0x%X", ent_infos[globals.local_player->held_weapon_index].pEntity);
             globals.held_weapon->set_address(ent_infos[globals.local_player->held_weapon_index].pEntity);
-            //logger::debug("Held weapon classname: %s", Entity::get_class_name(globals.held_weapon->address).c_str());
+            logger::debug("Held weapon classname: %s", Entity::get_class_name(globals.held_weapon->address).c_str());
             globals.held_weapon->update();
         } else {
             globals.held_weapon->invalidate();
@@ -112,6 +113,29 @@ namespace core {
         }
     }
 
+    void draw_menu() {
+        ImGui::Begin("##window");
+        ImGui::BeginTabBar("##tabs", ImGuiTabBarFlags_None);
+        for (auto& module : modules) {
+            module->draw_menu();
+        }
+        if (ImGui::BeginTabItem("Misc.")) {
+            static bool show_demo_window = false;
+            ImGui::Checkbox("Show ImGui Demo", &show_demo_window);
+            if (show_demo_window) {
+                ImGui::ShowDemoWindow(&show_demo_window);
+            }
+            static bool mat_fullbright = false;
+            ImGui::Checkbox("mat_fullbright 1", &mat_fullbright);
+            if (mat_fullbright) {
+                mem::write<bool>(BASE + 0x01584c80+0x6c, mat_fullbright);
+            }
+            ImGui::EndTabItem();
+        }
+        ImGui::EndTabBar();
+        ImGui::End();
+    }
+
     void init() {
         logger::info("Initializing");
 
@@ -133,8 +157,8 @@ namespace core {
 
         entity_updater.detach();
 
-        //modules.push_back(new AimAssist());
-        //modules.push_back(new Glow());
+        modules.push_back(new AimAssist());
+        modules.push_back(new Glow());
         modules.push_back(new RecoilControl());
         modules.push_back(new Triggerbot());
 

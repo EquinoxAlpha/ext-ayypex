@@ -1,15 +1,15 @@
 #pragma once
 
-#include "logging.h"
-#include "../offsets.h"
+#include "logging.hpp"
+#include "../offsets.hpp"
 #include <cstddef>
 #include <cstdint>
 #include <exception>
 #include <iostream>
 #include <string>
 #include <sys/types.h>
-#include "math.h"
-#include "mem.h"
+#include "math.hpp"
+#include "memory.hpp"
 
 #define NUM_ENTS 0x10000
 #define BASE 0x140000000
@@ -84,22 +84,41 @@ class Entity {
 
         //TODO: use mem::read_multiple for even faster updates
 
+        int life_state;
+        int bleedout_state;
+        mem::read_multiple<int>(std::vector<std::pair<uintptr_t, int*>>({
+            std::make_pair(address + offsets::entity::m_shieldHealth, &shield_health),
+            std::make_pair(address + offsets::entity::m_shieldHealthMax, &max_shield_health),
+            std::make_pair(address + offsets::entity::m_iTeamNum, &team_id),
+            std::make_pair(address + offsets::entity::m_squadID, &squad_id),
+            std::make_pair(address + offsets::entity::m_customScriptInt, &script_int),
+            std::make_pair(address + offsets::entity::m_lifeState, &life_state),
+            std::make_pair(address + offsets::entity::m_bleedoutState, &bleedout_state)
+        }));
+        is_alive = !(life_state > 0);
+        is_knocked = bleedout_state > 0;
+
+        float last_visible_time;
+
         mem::read<uintptr_t>(signifier_ptr, signifier);
-        mem::read<int>(address + offsets::entity::m_shieldHealth, shield_health);
+        /*mem::read<int>(address + offsets::entity::m_shieldHealth, shield_health);
         mem::read<int>(address + offsets::entity::m_shieldHealthMax, max_shield_health);
         mem::read<int>(address + offsets::entity::m_iTeamNum, team_id);
         mem::read<int>(address + offsets::entity::m_squadID, squad_id);
-        mem::read<int>(address + offsets::entity::m_customScriptInt, script_int);
-        float last_visible_time; mem::read<float>(address + offsets::lastVisibleTime, last_visible_time);
+        mem::read<int>(address + offsets::entity::m_customScriptInt, script_int);*/
+        mem::read<float>(address + offsets::lastVisibleTime, last_visible_time);
         is_visible = last_visible_time > Game::get_current_time() - 0.1f;
-        int life_state; mem::read<int>(address + offsets::entity::m_lifeState, life_state);
-        is_alive = !(life_state > 0);
-        int bleedout_state; mem::read<int>(address + offsets::entity::m_bleedoutState, bleedout_state);
-        is_knocked = bleedout_state > 0;
-        mem::read<vec3>(address + offsets::entity::m_vecAbsOrigin, position);
+        /*mem::read<vec3>(address + offsets::entity::m_vecAbsOrigin, position);
         mem::read<vec3>(address + offsets::entity::m_vecAbsVelocity, velocity);
         mem::read<vec3>(address + offsets::entity::collision_max, collision_max);
-        mem::read<vec3>(address + offsets::entity::collision_min, collision_min);
+        mem::read<vec3>(address + offsets::entity::collision_min, collision_min);*/
+
+        mem::read_multiple(std::vector<std::pair<uintptr_t, vec3*>>({
+            std::make_pair(address + offsets::entity::m_vecAbsOrigin, &position),
+            std::make_pair(address + offsets::entity::m_vecAbsVelocity, &velocity),
+            std::make_pair(address + offsets::entity::collision_max, &collision_max),
+            std::make_pair(address + offsets::entity::collision_min, &collision_min)
+        }));
 
         is_valid = true;
     }
@@ -119,12 +138,15 @@ class Entity {
         is_valid = false;
     }
 
+    // Offsets are broken
+    // TODO: get offsets from offsets.h instead of hardcoding them
     inline void enable_glow() {
         int glow_enabled = false;
         mem::read<int>(address + 0x03c8, glow_enabled);
         if (!glow_enabled) {
             mem::write<int>(address + 0x03c8, 1);
         }
+        
         int glow_context = 0;
         mem::read<int>(address + 0x03d0, glow_context);
         if (glow_context != 2) {
@@ -271,11 +293,11 @@ class Player : public Entity {
         held_weapon_index &= 0xFFF;
         mem::read<int>(address + offsets::entity::m_iHealth, health);
         mem::read<int>(address + offsets::entity::m_iMaxHealth, max_health);
-        mem::read<float>(address + 0x1a80+4, last_crosshair_time);
+        mem::read<float>(address + offsets::lastCrosshairTime, last_crosshair_time);
     }
 
     inline float get_last_crosshair_time() {
-        mem::read<float>(address + 0x1a80+4, last_crosshair_time);
+        mem::read<float>(address + offsets::lastCrosshairTime, last_crosshair_time);
         return last_crosshair_time;
     }
 

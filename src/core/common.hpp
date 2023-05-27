@@ -1,12 +1,12 @@
 #pragma once
 
-#include "configuration.h"
-#include "sdk/math.h"
-#include "sdk/draw_list.h"
-#include "sdk/mem.h"
-#include "mouse.h"
-#include "sdk/utils.h"
-#include "sdk/sdk.h"
+#include "configuration.hpp"
+#include "sdk/math.hpp"
+#include "sdk/draw_list.hpp"
+#include "sdk/memory.hpp"
+#include "mouse.hpp"
+#include "sdk/utils.hpp"
+#include "sdk/sdk.hpp"
 #include <cstddef>
 #include <cstdint>
 #include <cstring>
@@ -16,6 +16,7 @@
 #include <unordered_map>
 #include <vector>
 #include <iostream>
+#include <imgui/imgui.h>
 
 struct globals_t {
     vec2 window_size;

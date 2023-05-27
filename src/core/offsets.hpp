@@ -18,7 +18,8 @@ namespace offsets {
 
     inline constexpr ptrdiff_t globals = 0x165b880;             //GlobalVars
 
-    inline constexpr ptrdiff_t lastVisibleTime = 0x1A78+0x10;       //lastVisibleTime
+    inline constexpr ptrdiff_t lastVisibleTime = 0x1A80;       //lastVisibleTime
+    inline constexpr ptrdiff_t lastCrosshairTime = 0x1A84;
 
     inline constexpr ptrdiff_t mouse_sensitivity = 0x02125920;
 
@@ -33,7 +34,7 @@ namespace offsets {
         constexpr ptrdiff_t m_vecAbsOrigin = 0x14c;             //m_vecAbsOrigin
         constexpr ptrdiff_t m_vecAbsVelocity = 0x0140;          //m_vecAbsVelocity
         constexpr ptrdiff_t m_iName = 0x0580;                   //m_iSignifierName
-        constexpr ptrdiff_t m_latestPrimaryWeapons = 0x1a24;    //m_latestPrimaryWeapons
+        constexpr ptrdiff_t m_latestPrimaryWeapons = 0x1a24+1;    //m_latestPrimaryWeapons
         constexpr ptrdiff_t camera_origin = 0x1f58;     
         constexpr ptrdiff_t m_ammoPoolCapacity = 0x25bc;        //m_ammoPoolCapacity
         constexpr ptrdiff_t view_angles = m_ammoPoolCapacity - 0x14;
@@ -48,8 +49,8 @@ namespace offsets {
     }
 
     namespace weapon {
-        constexpr ptrdiff_t projectile_launch_speed = 0x1f50;          
-        constexpr ptrdiff_t projectile_gravity_scale = 0x1f58;
+        constexpr ptrdiff_t projectile_launch_speed = 0x1f70;          
+        constexpr ptrdiff_t projectile_gravity_scale = 0x1f78;
         constexpr ptrdiff_t is_semi_auto = 0x1a88+0x18c;         //WeaponSettings.base + is_semi_auto
         constexpr ptrdiff_t m_targetZoomFOV = 0xbc;                 //m_targetZoomFOV
     }

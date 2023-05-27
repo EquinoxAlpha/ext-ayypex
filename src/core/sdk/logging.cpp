@@ -1,4 +1,4 @@
-#include "logging.h"
+#include "logging.hpp"
 
 #include <cstdarg>
 #include <iostream>

@@ -13,12 +13,6 @@
 /core/
 /compile_commands.json
 
-# CMake
-cmake-build-*
-cmake_install.*
-progress.*
-CMakeDirectoryInformation.*
-
 # Prerequisites
 *.d
 
@@ -51,3 +45,16 @@ CMakeDirectoryInformation.*
 *.exe
 *.out
 *.app
+
+# CMake
+CMakeLists.txt.user
+CMakeCache.txt
+CMakeFiles
+CMakeScripts
+Testing
+Makefile
+cmake_install.cmake
+install_manifest.txt
+compile_commands.json
+CTestTestfile.cmake
+_deps

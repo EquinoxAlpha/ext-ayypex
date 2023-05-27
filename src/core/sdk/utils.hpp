@@ -1,10 +1,10 @@
 #pragma once
 
-#include "logging.h"
-#include "math.h"
-#include "mem.h"
+#include "logging.hpp"
+#include "math.hpp"
+#include "memory.hpp"
 #include <math.h>
-#include "../offsets.h"
+#include "../offsets.hpp"
 
 namespace utils {
     inline float get_mouse_sensitivity() {

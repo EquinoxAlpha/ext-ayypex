@@ -1,10 +1,10 @@
-#include "rcs.h"
+#include "rcs.hpp"
 
-#include "../common.h"
+#include "../common.hpp"
 #include <cmath>
 #include <iostream>
-#include "../configuration.h"
-#include "../sdk/utils.h"
+#include "../configuration.hpp"
+#include "../sdk/utils.hpp"
 
 void RecoilControl::tick(float delta_time) {
     static vec2 m;
@@ -32,6 +32,13 @@ void RecoilControl::tick(float delta_time) {
 }
 
 void RecoilControl::draw() {
+}
+
+void RecoilControl::draw_menu() {
+    if (ImGui::BeginTabItem("Recoil Control")) {
+        ImGui::Checkbox("Enabled", &active);
+        ImGui::EndTabItem();
+    }
 }
 
 void RecoilControl::init() {

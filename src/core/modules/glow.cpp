@@ -1,6 +1,7 @@
-#include "glow.h"
+#include "glow.hpp"
 
-#include "../common.h"
+#include "../common.hpp"
+#include "imgui/imgui.h"
 
 void Glow::tick(float delta_time) {
 }
@@ -18,6 +19,14 @@ void Glow::draw() {
         } else { 
             entity->set_glow_color(color); 
         }
+    }
+}
+
+void Glow::draw_menu() {
+    if (ImGui::BeginTabItem("Glow")) {
+        ImGui::ColorEdit3("Enemy Color", &settings.glow_enemy_color.x);
+        ImGui::ColorEdit3("Friendly Color", &settings.glow_friendly_color.x);
+        ImGui::EndTabItem();
     }
 }
 

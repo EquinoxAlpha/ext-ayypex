@@ -1,6 +1,7 @@
-#include "triggerbot.h"
+#include "triggerbot.hpp"
 
-#include "../common.h"
+#include "../common.hpp"
+#include "imgui/imgui.h"
 #include <iostream>
 #include <string>
 
@@ -56,6 +57,13 @@ void Triggerbot::tick(float delta_time) {
 }
 
 void Triggerbot::draw() {
+}
+
+void Triggerbot::draw_menu() {
+    if (ImGui::BeginTabItem("Triggerbot")) {
+        ImGui::Checkbox("Enabled", &active);
+        ImGui::EndTabItem();
+    }
 }
 
 void Triggerbot::init() {

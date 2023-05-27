@@ -1,7 +1,7 @@
-#include "aimassist.h"
+#include "aimassist.hpp"
 
-#include "../common.h"
-#include "../sdk/prediction.h"
+#include "../common.hpp"
+#include "../sdk/prediction.hpp"
 #include <cfloat>
 #include <chrono>
 #include <cmath>
@@ -95,6 +95,16 @@ void AimAssist::tick(float delta_time) {
 }
 
 void AimAssist::draw() {
+}
+
+void AimAssist::draw_menu() {
+    if (ImGui::BeginTabItem("Aim Assist")) {
+        ImGui::Checkbox("Enabled", &active);
+        ImGui::SliderFloat("Strength", &settings.aim_strength, 0.0f, 1.0f);
+        ImGui::SliderFloat("Deadzone", &settings.aim_deadzone.x, 0.0f, 3.0f);
+        ImGui::SliderFloat("FOV", &settings.aim_fov, 0.0f, 180.0f);
+        ImGui::EndTabItem();
+    }
 }
 
 void AimAssist::init() {

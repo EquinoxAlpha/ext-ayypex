@@ -1,5 +1,5 @@
-#include "configuration.h"
-#include "sdk/logging.h"
+#include "configuration.hpp"
+#include "sdk/logging.hpp"
 
 #include <math.h>
 #include <thread>

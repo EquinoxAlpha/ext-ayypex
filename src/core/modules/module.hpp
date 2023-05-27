@@ -9,6 +9,7 @@ class Module {
 
     virtual void tick(float delta_time) = 0;
     virtual void draw() = 0;
+    virtual void draw_menu() = 0;
     virtual void init() = 0;
 
     Module() {

@@ -1,11 +1,11 @@
 #pragma once
 
-#include "sdk/math.h"
+#include "sdk/math.hpp"
 #include <string>
 #include <unordered_map>
 #include <nlohmann/json.hpp>
 #include <fstream>
-#include "sdk/logging.h"
+#include "sdk/logging.hpp"
 
 using json = nlohmann::json;
 
