@@ -5,7 +5,7 @@ The latest commit adds an overlay and menu that I was making for another project
 
 Currently, this repository is more of a base to add your own features using the SDK and overlay code, **not** a ready to use cheat.
 
-!! the offsets are probably not up to date, I will not be bothering to update them !!
+!! the offsets are probably not up to date, I will not update them !!
 
 # ayypex
 
