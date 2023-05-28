@@ -1,5 +1,4 @@
-
-This repository is dead. I'll either be remaking ayypex in Rust at some future time ("C++ is dead to me") or just doing nothing (as I no longer play Apex Legends). Originally I just wanted to make an internal to see how difficult it would be, it worked badly, so I made an external which is also pretty bad, which is the reason I never posted it on UC (until someone found the repository link for the internal and posted it)
+A complete rewrite in Rust is coming at some future time. I'm still learning Rust so it'll take a while. This is missing a lot of important features, and the features that work, don't work very well.
 
 The latest commit adds an overlay and menu that I was making for another project which can be toggled via Insert. It is up to you to add any features that use this overlay. I haven't tested the menu extensively, but it should work.
 
